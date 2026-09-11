@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "sleep_percentage",
+    "name": "Sleep Percentage",
+    "description": "",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["WoodEXPLOSIVE"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

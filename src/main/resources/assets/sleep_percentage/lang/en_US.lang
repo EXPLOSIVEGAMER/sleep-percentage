@@ -1,0 +1,2 @@
+tile.bed.set_spawn_point=Respawn point set
+msg.sleep_progress=Players sleeping: %d / %d

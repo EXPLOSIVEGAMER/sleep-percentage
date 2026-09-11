@@ -1,0 +1,58 @@
+buildscript {
+    repositories {
+        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
+        mavenCentral()
+        maven {
+            name = 'forge'
+            url = 'https://maven.minecraftforge.net/'
+        }
+    }
+    dependencies {
+        // Legacy ForgeGradle fork that supports 1.7.10 on modern Gradle/Java
+        // See https://github.com/anatawa12/ForgeGradle-1.2
+        classpath ('com.anatawa12.forge:ForgeGradle:1.2-1.1.+') { changing = true }
+    }
+}
+
+plugins {
+    id 'eclipse'
+    id 'idea'
+}
+
+apply plugin: 'forge'
+
+group = mod_group_id
+version = mod_version
+
+// Forge 1.7.10 targets old Java bytecode; the mod itself is compiled at source/target 1.8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+minecraft {
+    // The FG1.2 DSL takes a single combined "<minecraft_version>-<forge_version>" string,
+    // there is no separate mappings channel/version like on modern ForgeGradle.
+    version = "${minecraft_version}-${forge_version}"
+    runDir = 'run'
+}
+
+repositories {
+    // Put repositories for dependencies here
+}
+
+dependencies {
+    // Specify additional mod dependencies here
+}
+
+// mcmod.info (not mods.toml) is the metadata file read by Forge on 1.7.10.
+processResources {
+    inputs.property 'version', project.version
+    inputs.property 'mcversion', minecraft_version
+
+    filesMatching('mcmod.info') {
+        expand 'version': project.version, 'mcversion': minecraft_version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
